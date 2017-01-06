@@ -1,0 +1,83 @@
+from selenium import webdriver
+chrome_path = r"C:\Users\Gaurav Jetley\Documents\Selenium\chromedriver_win32\chromedriver.exe"
+
+driver = webdriver.Chrome(chrome_path)
+
+#Getting all Department Names
+driver.get("https://www.amazon.com/Best-Sellers-Appliances/zgbs/appliances/ref=zg_bs_nav_0")
+department_names = driver.find_elements_by_class_name("zg_itemImmersion")
+
+for link in department_names:
+    print(link.text)
+    print(link.get_attribute("href"))
+
+
+
+#### APPLIANCES CATEGORY ####
+driver.get("https://www.amazon.com/Best-Sellers-Appliances/zgbs/appliances/ref=zg_bs_nav_0")
+
+#Getting URLs for 1 to 20 Products
+links = open(r"C:\Users\Gaurav Jetley\Documents\Selenium\Amazon QA Scraper\Amazon best seller products links.txt",'w+')
+for link in driver.find_elements_by_xpath("//div[@class='zg_itemWrapper']/div[@class='a-section a-spacing-none p13n-asin']/a[@class='a-link-normal']"):
+    print>>links, link.get_attribute("href")
+links.close()
+
+#getting URLs for 21 to 40 Products
+driver.find_element_by_id("zg_page2").click()
+links = open(r"C:\Users\Gaurav Jetley\Documents\Selenium\Amazon QA Scraper\Amazon best seller products links.txt",'ab')
+for link in driver.find_elements_by_xpath("//div[@class='zg_itemWrapper']/div[@class='a-section a-spacing-none p13n-asin']/a[@class='a-link-normal']"):
+    print>>links, link.get_attribute("href")
+links.close()
+
+#getting URLs for 41 to 60 Products
+driver.find_element_by_id("zg_page3").click()
+links = open(r"C:\Users\Gaurav Jetley\Documents\Selenium\Amazon QA Scraper\Amazon best seller products links.txt",'ab')
+for link in driver.find_elements_by_xpath("//div[@class='zg_itemWrapper']/div[@class='a-section a-spacing-none p13n-asin']/a[@class='a-link-normal']"):
+    print>>links, link.get_attribute("href")
+links.close()
+
+#getting URLs for 61 to 80 Products
+driver.find_element_by_id("zg_page4").click()
+links = open(r"C:\Users\Gaurav Jetley\Documents\Selenium\Amazon QA Scraper\Amazon best seller products links.txt",'ab')
+for link in driver.find_elements_by_xpath("//div[@class='zg_itemWrapper']/div[@class='a-section a-spacing-none p13n-asin']/a[@class='a-link-normal']"):
+    print>>links, link.get_attribute("href")
+links.close()
+
+#getting URLs for 81 to 100 Products
+driver.find_element_by_id("zg_page5").click()
+links = open(r"C:\Users\Gaurav Jetley\Documents\Selenium\Amazon QA Scraper\Amazon best seller products links.txt",'ab')
+for link in driver.find_elements_by_xpath("//div[@class='zg_itemWrapper']/div[@class='a-section a-spacing-none p13n-asin']/a[@class='a-link-normal']"):
+    print>>links, link.get_attribute("href")
+links.close()
+
+
+#### PRODUCT DATA ####
+driver.get("https://www.amazon.com/GE-RPWFE-Refrigerator-Water-Filter/dp/B009PCI2JU/ref=zg_bs_appliances_1?_encoding=UTF8&psc=1&refRID=5204CQ5VAADXS6RF32BP")
+
+title = driver.find_element_by_id("productTitle")
+title.text
+
+numberOfCustomerReviews = driver.find_element_by_id("acrCustomerReviewText")
+numberOfCustomerReviews.text
+
+numOfQA = driver.find_element_by_id("askATFLink")
+numOfQA.text
+
+price = driver.find_element_by_id("priceblock_ourprice")
+price.text
+
+merchInfo = driver.find_element_by_id("merchant-info")
+merchInfo.text
+
+availability = driver.find_element_by_id("availability")
+availability.text
+
+techDetails = driver.find_element_by_id("productDetails_techSpec_section_1")
+techDetails.text
+
+productDetails = driver.find_element_by_id("productDetails_detailBullets_sections1")
+productDetails.text
+
+driver.find_element_by_class_name("a-link-normal askWidgetSeeAllAnswersInline").click()
+topQA = driver.find_element_by_class_name("askTopQandA")
+topQA.text
