@@ -36,9 +36,14 @@ for list1 in amazon_dept_best_sellers.find("ul").findAll("li"):
              
             print "       Sub Department ---- " + list2.text
             if  list2.text == "Thread & Floss":
+                data =  list1.text.replace(",","") + "," + list1.find("a").get("href") + "," + list2.text.replace(",","") + ","+ list2.find("a").get("href") + "," + " We will deal this later. There ia a bug in the Amazon web site!!!!!"  + "\n"
+                file.write(bytes(data.encode("utf-8")))
                 print "       Sub Department ---- " + list2.text + " -- We will deal this later. There ia a bug in the Amazon web site!!!!!"
-            elif list2.text == "Yarn" or list2.text == "Jerseys" or list2.text == "Musical Instruments" or list2.text == "Pretend Play" or list2.text == "Shoes" or list2.text == "Test Preparation" or list2.text == "Office Lighting" or list2.text == "Hats" or list2.text == "Bags & Cases"  or list2.text == "Digital Picture Frames" or list2.text == "Puzzles & Games"  or list2.text == "Literary Journals"  or list2.text == "Men's Interest" or list2.text == "Music"  or list2.text == "Animal Care & Pets" or list2.text == "Religion" or list2.text == "Travel" or list2.text == "Women's Interest" or list2.text == "Pest Control" or list2.text == "Sports & Leisure":
-                print "       Sub Department ---- " + list2.text + " We have already collected this details. There ia a bug in the Amazon web site!!!!!"
+            
+            elif list2.text == "Yarn" or list2.text == "Jerseys" or list2.text == "Tax Preparation" or list2.text == "Photography" or list2.text == "Musical Instruments" or list2.text == "Pretend Play" or list2.text == "Shoes" or list2.text == "Test Preparation" or list2.text == "Office Lighting" or list2.text == "Hats" or list2.text == "Bags & Cases"  or list2.text == "Digital Picture Frames" or list2.text == "Puzzles & Games"  or list2.text == "Literary Journals"  or list2.text == "Men's Interest" or list2.text == "Music"  or list2.text == "Animal Care & Pets" or list2.text == "Religion" or list2.text == "Travel" or list2.text == "Women's Interest" or list2.text == "Pest Control" or list2.text == "Sports & Leisure":
+                 data =  list1.text.replace(",","") + "," + list1.find("a").get("href") + "," + list2.text.replace(",","") + ","+ list2.find("a").get("href") + "," + " We have already collected this details. There ia a bug in the Amazon web site!!!!! " +","+ "No Child Links " + "\n"
+                 file.write(bytes(data.encode("utf-8")))
+                 print "       Sub Department ---- " + list2.text + " We have already collected this details. There ia a bug in the Amazon web site!!!!!"
             else:
                  list2_data = requests.get(list2.find("a").get("href"))
              
@@ -59,9 +64,8 @@ for list1 in amazon_dept_best_sellers.find("ul").findAll("li"):
                          file.write(bytes(data.encode("utf-8")))                                            
 file.close()
 
-################################## for knowing the errors in each sub department ####################################################
 
-#%%
+########################  for knowing the errors in the department ###############################################
 
 page = requests.get("https://www.amazon.com/Best-Sellers/zgbs/ref=zg_bs_unv_e_0_e_1")
 amazon_data  = BeautifulSoup(page.content, 'html.parser')
@@ -74,7 +78,7 @@ amazon_dept_best_sellers  = amazon_data.find("ul",{"id":"zg_browseRoot"})
 print len(amazon_dept_best_sellers.find("ul").findAll("li"))
 
 
-for num in range(36,40):
+for num in range(34,40):
     
      for list1 in amazon_dept_best_sellers.find("ul").findAll("li")[num]:
 
@@ -94,7 +98,7 @@ for num in range(36,40):
                  print "       Sub Department ---- " + list2.text
                  if  list2.text == "Thread & Floss":
                      print "       Sub Department ---- " + list2.text + " -- We will deal this later. There ia a bug in the Amazon web site!!!!!"
-                 elif list2.text == "Yarn" or list2.text == "Jerseys" or list2.text == "Musical Instruments" or list2.text == "Pretend Play" or list2.text == "Shoes" or list2.text == "Test Preparation" or list2.text == "Office Lighting" or list2.text == "Hats" or list2.text == "Bags & Cases"  or list2.text == "Digital Picture Frames" or list2.text == "Puzzles & Games"  or list2.text == "Literary Journals"  or list2.text == "Men's Interest" or list2.text == "Music"  or list2.text == "Animal Care & Pets" or list2.text == "Religion" or list2.text == "Travel" or list2.text == "Women's Interest" or list2.text == "Pest Control" or list2.text == "Sports & Leisure":
+                 elif list2.text == "Yarn" or list2.text == "Jerseys" or list2.text == "Tax Preparation" or list2.text == "Photography" or list2.text == "Musical Instruments" or list2.text == "Pretend Play" or list2.text == "Shoes" or list2.text == "Test Preparation" or list2.text == "Office Lighting" or list2.text == "Hats" or list2.text == "Bags & Cases"  or list2.text == "Digital Picture Frames" or list2.text == "Puzzles & Games"  or list2.text == "Literary Journals"  or list2.text == "Men's Interest" or list2.text == "Music"  or list2.text == "Animal Care & Pets" or list2.text == "Religion" or list2.text == "Travel" or list2.text == "Women's Interest" or list2.text == "Pest Control" or list2.text == "Sports & Leisure":
                      print "        The Sub Department ---- " + list2.text + " We have already collected this details. There ia a bug in the Amazon web site!!!!!"
                  else:
                      list2_data = requests.get(list2.find("a").get("href"))
@@ -115,4 +119,6 @@ for num in range(36,40):
                          #print(each_child_link)
                              file.write(bytes(data.encode("utf-8")))   
 file.close()
+
+
 
